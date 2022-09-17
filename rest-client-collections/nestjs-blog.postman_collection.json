@@ -1,0 +1,254 @@
+{
+	"variables": [],
+	"info": {
+		"name": "nestjs-blog",
+		"_postman_id": "24df094c-7cb1-4d53-b802-0d7ae339ced0",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "posts",
+			"description": "",
+			"item": [
+				{
+					"name": "getAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"tests['response json contains headers'] = _.has(responseJSON, 'headers');",
+									"tests['response json contains args'] = _.has(responseJSON, 'args');",
+									"tests['response json contains url'] = _.has(responseJSON, 'url');",
+									"",
+									"tests['args key contains argument passed as url parameter'] = ('test' in responseJSON.args);",
+									"tests['args passed via request url params has value \"123\"'] = (_.get(responseJSON, 'args.test') === \"123\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:3000/posts",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"tests['response json contains headers'] = _.has(responseJSON, 'headers');",
+									"tests['response json contains args'] = _.has(responseJSON, 'args');",
+									"tests['response json contains url'] = _.has(responseJSON, 'url');",
+									"",
+									"tests['args key contains argument passed as url parameter'] = ('test' in responseJSON.args);",
+									"tests['args passed via request url params has value \"123\"'] = (_.get(responseJSON, 'args.test') === \"123\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:3000/posts",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Hello\",\n\t\"description\":\"Test Desc\"\n}"
+						},
+						"description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"tests['response json contains headers'] = _.has(responseJSON, 'headers');",
+									"tests['response json contains args'] = _.has(responseJSON, 'args');",
+									"tests['response json contains url'] = _.has(responseJSON, 'url');",
+									"",
+									"tests['args key contains argument passed as url parameter'] = ('test' in responseJSON.args);",
+									"tests['args passed via request url params has value \"123\"'] = (_.get(responseJSON, 'args.test') === \"123\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:3000/posts/123",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+					},
+					"response": []
+				},
+				{
+					"name": "edit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"tests['response json contains headers'] = _.has(responseJSON, 'headers');",
+									"tests['response json contains args'] = _.has(responseJSON, 'args');",
+									"tests['response json contains url'] = _.has(responseJSON, 'url');",
+									"",
+									"tests['args key contains argument passed as url parameter'] = ('test' in responseJSON.args);",
+									"tests['args passed via request url params has value \"123\"'] = (_.get(responseJSON, 'args.test') === \"123\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:3000/posts/123",
+						"method": "PUT",
+						"header": [],
+						"body": {},
+						"description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"tests['response json contains headers'] = _.has(responseJSON, 'headers');",
+									"tests['response json contains args'] = _.has(responseJSON, 'args');",
+									"tests['response json contains url'] = _.has(responseJSON, 'url');",
+									"",
+									"tests['args key contains argument passed as url parameter'] = ('test' in responseJSON.args);",
+									"tests['args passed via request url params has value \"123\"'] = (_.get(responseJSON, 'args.test') === \"123\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:3000/posts/123",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET Index",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var responseJSON;",
+							"",
+							"try { ",
+							"    responseJSON = JSON.parse(responseBody); ",
+							"    tests['response is valid JSON'] = true;",
+							"}",
+							"catch (e) { ",
+							"    responseJSON = {}; ",
+							"    tests['response is valid JSON'] = false;",
+							"}",
+							"",
+							"tests['response json contains headers'] = _.has(responseJSON, 'headers');",
+							"tests['response json contains args'] = _.has(responseJSON, 'args');",
+							"tests['response json contains url'] = _.has(responseJSON, 'url');",
+							"",
+							"tests['args key contains argument passed as url parameter'] = ('test' in responseJSON.args);",
+							"tests['args passed via request url params has value \"123\"'] = (_.get(responseJSON, 'args.test') === \"123\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+			},
+			"response": []
+		}
+	]
+}
