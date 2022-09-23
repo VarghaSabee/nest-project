@@ -1,53 +1,47 @@
 import { Injectable } from '@nestjs/common';
-import { randomIntFromInterval } from 'src/utils/randomizer';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Post } from './post.interface';
+import { Posts } from './posts.entity';
 
 @Injectable()
 export class PostService {
-    private posts: Post[] = []
+  private posts: Post[] = [];
 
-    findAll(page: number, size: number) {
-        const startOffset = page * size
-        const endOffset = startOffset + size;
-        return this.posts.slice(startOffset, endOffset)
-    }
+  constructor(
+    @InjectRepository(Posts)
+    private readonly postsRepository: Repository<Posts>,
+  ) {}
 
-    findById(id: number) {
-        const index = this.posts.findIndex(p => p.id === id)
+  findAll(page: number, size: number) {
+    return this.postsRepository.find();
+  }
 
-        if (index < 0) throw new Error("Not found")
+  findById(id: number) {
+    return this.postsRepository.findOneBy({ id: id });
+  }
 
-        return this.posts[index]
-    }
+  create(post: CreatePostDto) {
+    return this.postsRepository.create({});
+  }
 
-    create(post: CreatePostDto) {
-        const _post: Post = {
-            id: randomIntFromInterval(1, 1000),
-            createdAt: new Date().toDateString(),
-            ...post
-        }
-        this.posts.push(_post)
-        return _post
-    }
+  update(id: number, post: UpdatePostDto) {
+    const index = this.posts.findIndex((p) => p.id === id);
 
-    update(id: number, post: UpdatePostDto) {
-        const index = this.posts.findIndex(p => p.id === id)
+    if (index < 0) throw new Error('Not found');
 
-        if (index < 0) throw new Error("Not found")
+    const _post: Post = {
+      ...this.posts[index],
+      ...post,
+    };
 
-        const _post: Post = {
-            ...this.posts[index],
-            ...post
-        }
+    this.posts[index] = _post;
+    return _post;
+  }
 
-        this.posts[index] = _post
-        return _post
-    }
-
-    delete(id: number) {
-        this.posts = this.posts.filter(p => p.id !== id)
-    }
-
+  delete(id: number) {
+    this.posts = this.posts.filter((p) => p.id !== id);
+  }
 }
