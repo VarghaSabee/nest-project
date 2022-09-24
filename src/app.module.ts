@@ -5,20 +5,22 @@ import { PostModule } from './posts/posts.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { entities } from './entities';
 import { DataSource } from 'typeorm';
+import { root } from './utils/paths';
+import { LikesModule } from './likes/likes.module';
+
+console.info(root);
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'blog',
       entities,
+      logging: true,
+      type: 'sqlite',
       synchronize: true,
+      database: `${root}/db/db.sqlite`,
     }),
     PostModule,
+    LikesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

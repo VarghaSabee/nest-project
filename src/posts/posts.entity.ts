@@ -2,19 +2,19 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Posts {
-  @PrimaryGeneratedColumn({ type: 'bigint' })
+  @PrimaryGeneratedColumn({ type: 'int' })
   id: number;
 
   @Column({ type: 'text', length: 140 })
   title: string;
 
-  @Column({ type: 'longtext', nullable: true })
+  @Column({ type: 'text', nullable: true })
   description: string;
 
   @Column({ default: false, name: 'active' })
   isActive: boolean;
 
-  @Column({ type: 'datetime', default: new Date().toString() })
+  @Column({ type: 'datetime', default: new Date().toISOString() })
   createdAt: string;
 
   @Column({ type: 'datetime', nullable: true })

@@ -10,13 +10,14 @@ import {
   HttpCode,
   HttpStatus,
   /* Request, Response,*/ Query,
-  Header,
-  Redirect,
+  // Header,
+  // Redirect,
+  DefaultValuePipe,
 } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 // import { Request as IRequest, Response as IResponse } from 'express';
-import { PostService } from './posts.service';
+import { DEFAULT_PAGE_SIZE, PostService } from './posts.service';
 
 @Controller('posts')
 export class PostsController {
@@ -34,11 +35,12 @@ export class PostsController {
   // }
 
   @Get()
-  @Header('Cache-Control', 'none')
-  @Redirect('https://docs.nestjs.com/controllers', HttpStatus.MOVED_PERMANENTLY)
+  // @Header('Cache-Control', 'none')
+  // @Redirect('https://docs.nestjs.com/controllers', HttpStatus.MOVED_PERMANENTLY)
   findAll(
-    @Query('page', new ParseIntPipe()) page: number,
-    @Query('size', new ParseIntPipe()) size: number,
+    @Query('page', new DefaultValuePipe(0), new ParseIntPipe()) page: number,
+    @Query('size', new DefaultValuePipe(DEFAULT_PAGE_SIZE), new ParseIntPipe())
+    size: number,
   ) {
     return this.postsService.findAll(page, size);
   }
