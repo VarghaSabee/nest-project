@@ -4,15 +4,12 @@ import { Paginated } from 'src/utils/pagination/paginated';
 import { Repository } from 'typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
-import { Post } from './post.interface';
 import { Posts } from './posts.entity';
 
 export const DEFAULT_PAGE_SIZE = 10;
 
 @Injectable()
 export class PostService {
-  private posts: Post[] = [];
-
   constructor(
     @InjectRepository(Posts)
     private readonly postsRepository: Repository<Posts>,
