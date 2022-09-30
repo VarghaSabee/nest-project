@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Likes } from 'src/likes/likes.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Posts {
@@ -22,4 +23,7 @@ export class Posts {
 
   @Column({ type: 'datetime', nullable: true })
   deletedAt: string;
+
+  @OneToMany(() => Likes, (like) => like.post)
+  likes: Likes[]
 }

@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Posts } from 'src/posts/posts.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Likes {
@@ -7,4 +8,7 @@ export class Likes {
 
   @Column({ type: 'datetime', default: new Date().toISOString() })
   createdAt: string;
+
+  @ManyToOne(() => Posts, (post) => post.likes)
+  post: Posts;
 }

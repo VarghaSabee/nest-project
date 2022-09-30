@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Paginated } from 'src/utils/pagination/paginated';
-import { Repository } from 'typeorm';
+import { In, Like, Repository } from 'typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Posts } from './posts.entity';
@@ -13,13 +13,41 @@ export class PostService {
   constructor(
     @InjectRepository(Posts)
     private readonly postsRepository: Repository<Posts>,
-  ) {}
+  ) { }
 
   async findAll(page: number, size: number) {
     const skip = page * size;
     const [posts, count] = await this.postsRepository.findAndCount({
       skip: skip,
       take: size,
+      where: {
+        isActive: true,
+      },
+      order: {
+        id: {
+          direction: "DESC"
+        }
+      },
+      relations: {
+        likes: true
+      }
+    });
+
+    const pages = Math.ceil(count / size);
+
+    return new Paginated<Posts>(posts, count, pages, page);
+  }
+
+  async findNotApprovedAdmin(q: string, page: number, size: number) {
+    const skip = page * size;
+    const [posts, count] = await this.postsRepository.findAndCount({
+      skip: skip,
+      take: size,
+      where: {
+        isActive: false,
+        // id: In([1, 3])
+        title: Like(`%${q}%`)
+      },
     });
 
     const pages = Math.ceil(count / size);

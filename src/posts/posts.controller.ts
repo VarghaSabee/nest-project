@@ -21,7 +21,19 @@ import { DEFAULT_PAGE_SIZE, PostService } from './posts.service';
 
 @Controller('posts')
 export class PostsController {
-  constructor(private readonly postsService: PostService) {}
+  constructor(private readonly postsService: PostService) { }
+
+  // for Admin
+
+  @Get("/admin")
+  findNotApprovedAdmin(
+    @Query('q', new DefaultValuePipe("")) q: string,
+    @Query('page', new DefaultValuePipe(0), new ParseIntPipe()) page: number,
+    @Query('size', new DefaultValuePipe(DEFAULT_PAGE_SIZE), new ParseIntPipe())
+    size: number,
+  ) {
+    return this.postsService.findNotApprovedAdmin(q, page, size);
+  }
 
   // const handler = (req, res, next) => {
   //     res.write("")
@@ -69,4 +81,6 @@ export class PostsController {
   delete(@Param('id', new ParseIntPipe()) id: number) {
     return this.postsService.delete(id);
   }
+
+
 }
