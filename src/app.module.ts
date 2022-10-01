@@ -7,6 +7,8 @@ import { entities } from './entities';
 import { DataSource } from 'typeorm';
 import { root } from './utils/paths';
 import { LikesModule } from './likes/likes.module';
+import { UserModule } from './user/user.module';
+
 
 console.info(root);
 
@@ -21,10 +23,11 @@ console.info(root);
     }),
     PostModule,
     LikesModule,
+    UserModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
-  constructor(private dataSource: DataSource) {}
+  constructor(private dataSource: DataSource) { }
 }

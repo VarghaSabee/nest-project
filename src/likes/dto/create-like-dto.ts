@@ -1,4 +1,6 @@
+import { IsNumber } from "class-validator";
+
 export class CreateLikesDto {
-    constructor(readonly postId: number) {
-    }
+    @IsNumber()
+    public postId: number
 }
