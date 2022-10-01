@@ -24,7 +24,6 @@ export class PostsController {
   constructor(private readonly postsService: PostService) { }
 
   // for Admin
-
   @Get("/admin")
   findNotApprovedAdmin(
     @Query('q', new DefaultValuePipe("")) q: string,

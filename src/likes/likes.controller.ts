@@ -1,10 +1,11 @@
 import { Body, Controller, DefaultValuePipe, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Query } from "@nestjs/common";
 import { DEFAULT_PAGE_SIZE } from "src/posts/posts.service";
+import { CreateLikesDto } from "./dto/create-like-dto";
 import { LikesService } from "./likes.service";
 
 @Controller('likes')
 export class LikesController {
-  constructor(private readonly likesService: LikesService) {}
+  constructor(private readonly likesService: LikesService) { }
 
   @Get()
   findAll(
@@ -17,7 +18,7 @@ export class LikesController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  create(@Body() body: any) {
+  create(@Body() body: CreateLikesDto) {
     return this.likesService.create(body);
   }
 

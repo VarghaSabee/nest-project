@@ -20,14 +20,14 @@ export class PostService {
     const [posts, count] = await this.postsRepository.findAndCount({
       skip: skip,
       take: size,
-      where: {
-        isActive: true,
-      },
-      order: {
-        id: {
-          direction: "DESC"
-        }
-      },
+      // where: {
+      //   isActive: true,
+      // },
+      // order: {
+      //   id: {
+      //     direction: "DESC"
+      //   }
+      // },
       relations: {
         likes: true
       }

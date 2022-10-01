@@ -9,9 +9,9 @@ import { Likes } from './likes.entity';
 export class LikesService {
   constructor(
     @InjectRepository(Likes)
-    // @InjectRepository(Posts)
     private readonly likesRepository: Repository<Likes>,
-    // private readonly postsRepository: Repository<Posts>,
+    @InjectRepository(Posts)
+    private readonly postsRepository: Repository<Posts>,
   ) { }
 
   findAll(page: number, size: number) {
@@ -23,18 +23,20 @@ export class LikesService {
   }
 
   async create(createDTO: CreateLikesDto) {
-    // const post = await this.postsRepository.findOneBy({ id: createDTO.postId });
+    const post = await this.postsRepository.findOneBy({ id: createDTO.postId });
 
-    // if (!post) {
-    //   throw new HttpException(
-    //     `Post with given id = ${createDTO.postId} not found!`,
-    //     HttpStatus.NOT_FOUND,
-    //   );
-    // }
+    if (!post) {
+      throw new HttpException(
+        `Post with given id = ${createDTO.postId} not found!`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
 
-    return this.likesRepository.create({
+    const like = this.likesRepository.create({
       post: { id: createDTO.postId },
     });
+
+    return this.likesRepository.save(like)
   }
 
   async delete(id: number) {

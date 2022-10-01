@@ -1,4 +1,5 @@
 import { Posts } from 'src/posts/posts.entity';
+import { User } from 'src/user/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
@@ -11,4 +12,7 @@ export class Likes {
 
   @ManyToOne(() => Posts, (post) => post.likes)
   post: Posts;
+
+  @ManyToOne(() => User, (user) => user.likes)
+  user: User;
 }

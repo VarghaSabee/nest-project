@@ -1,7 +1,10 @@
+import { IsBoolean, IsString } from "class-validator"
+
 export class UpdatePostDto {
-  constructor(
-    readonly title: string,
-    readonly description: string,
-    readonly isActive: boolean,
-  ) {}
+  @IsString()
+  public title: string
+  @IsString()
+  public description: string
+  @IsBoolean()
+  public isActive: boolean
 }
