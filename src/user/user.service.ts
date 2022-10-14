@@ -1,13 +1,16 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
 import bcrypt from "bcrypt"
 import { Repository } from 'typeorm';
-import { CreateUserDto } from './dto/user.create.dto';
 import { User } from './user.entity';
+import { CreateUserDto } from './dto/user.create.dto';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { InjectRepository } from "@nestjs/typeorm";
 
 @Injectable()
 export class UserService {
 
-    constructor(private userRepository: Repository<User>) {
+    constructor(
+        @InjectRepository(User)
+        private userRepository: Repository<User>) {
     }
 
     async create(createDTO: CreateUserDto) {
@@ -49,12 +52,17 @@ export class UserService {
             username: createDTO.username,
         })
 
-        return this.userRepository.save(newUser);
+        const savedUser = await this.userRepository.save(newUser)
+        delete savedUser.password
+        return savedUser;
     }
 
+    checkPassword(user: User, plainPassword: string): Promise<boolean> {
+        return bcrypt.compare(plainPassword, user.password);
+    }
 
     findByEmailOrUsername(email?: string, username?: string) {
-        return this.userRepository.find({
+        return this.userRepository.findOne({
             where: [
                 { email: email },
                 { username: username }
