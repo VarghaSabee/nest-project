@@ -8,6 +8,7 @@ import { DataSource } from 'typeorm';
 import { root } from './utils/paths';
 import { LikesModule } from './likes/likes.module';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 
 console.info(root);
@@ -21,9 +22,10 @@ console.info(root);
       synchronize: true,
       database: `${root}/db/db.sqlite`,
     }),
+    UserModule,
     PostModule,
     LikesModule,
-    UserModule
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

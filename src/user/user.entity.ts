@@ -13,10 +13,10 @@ export class User {
     @Column({ type: 'text', length: 160, unique: true })
     email: string;
 
-    @Column({ type: 'text', length: 120 })
+    @Column({ type: 'text', length: 120, default: "" })
     firstName: string;
 
-    @Column({ type: 'text', length: 120 })
+    @Column({ type: 'text', length: 120, default: "" })
     lastName: string;
 
     @Column({ type: 'text', default: "local" }) // 
