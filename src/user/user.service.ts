@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt"
+const bcrypt = require('bcrypt');
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/user.create.dto';
