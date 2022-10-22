@@ -9,6 +9,8 @@ import { root } from './utils/paths';
 import { LikesModule } from './likes/likes.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { PostService } from './posts/posts.service';
+import { Posts } from './posts/posts.entity';
 
 
 console.info(root);
@@ -26,9 +28,10 @@ console.info(root);
     PostModule,
     LikesModule,
     AuthModule,
+    TypeOrmModule.forFeature([Posts]),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PostService],
 })
 export class AppModule {
   constructor(private dataSource: DataSource) { }
