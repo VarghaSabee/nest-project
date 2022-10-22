@@ -56,23 +56,16 @@ export class PostService {
   }
 
   async findById(id: number) {
-    const post = await this.postsRepository.findOneBy({ id: id });
-
-    if (!post) {
-      throw new HttpException(
-        `Post with given id = ${id} not found!`,
-        HttpStatus.NOT_FOUND,
-      );
-    }
-
-    return post;
+    return this.findPostOrFail(id);
   }
 
-  create(createDTO: CreatePostDto) {
+  async create(createDTO: CreatePostDto) {
     const post = this.postsRepository.create({
       ...createDTO,
     });
-    return this.postsRepository.save(post);
+
+    const savedPost = await this.postsRepository.save(post)
+    return this.responsePost(savedPost);
   }
 
   async update(id: number, updateDTO: UpdatePostDto) {
@@ -81,14 +74,7 @@ export class PostService {
     //   { id: id },
     //   { ...updateDTO, updatedAt: new Date().toISOString() },
     // );
-    const post = await this.postsRepository.findOneBy({ id: id });
-
-    if (!post) {
-      throw new HttpException(
-        `Post with given id = ${id} not found!`,
-        HttpStatus.NOT_FOUND,
-      );
-    }
+    const post = await this.findPostOrFail(id);
 
     return this.postsRepository.save({
       ...post,
@@ -98,6 +84,26 @@ export class PostService {
   }
 
   async delete(id: number) {
+    this.findPostOrFail(id)
     await this.postsRepository.delete({ id: id });
+  }
+
+
+  private responsePost = (posts: Posts) => {
+    const { deletedAt, isActive, ...result } = posts;
+    return result as any;
+  }
+
+  private findPostOrFail = async (id: number): Promise<Posts> => {
+    const post = await this.postsRepository.findOneBy({ id: id });
+
+    if (!post) {
+      throw new HttpException(
+        `Post with given id = ${id} not found!`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    return post
   }
 }

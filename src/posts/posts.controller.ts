@@ -22,12 +22,12 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { DEFAULT_PAGE_SIZE, PostService } from './posts.service';
 
 @Controller('posts')
-@UseGuards(JwtAuthGuard)
 export class PostsController {
   constructor(private readonly postsService: PostService) { }
 
   // for Admin
   @Get("/admin")
+  @UseGuards(JwtAuthGuard)
   findNotApprovedAdmin(
     @Query('q', new DefaultValuePipe("")) q: string,
     @Query('page', new DefaultValuePipe(0), new ParseIntPipe()) page: number,
@@ -65,12 +65,14 @@ export class PostsController {
   }
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.CREATED)
   create(@Body() body: CreatePostDto) {
     return this.postsService.create(body);
   }
 
   @Put(':id')
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.ACCEPTED)
   update(
     @Param('id', new ParseIntPipe()) id: number,
@@ -80,9 +82,8 @@ export class PostsController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   delete(@Param('id', new ParseIntPipe()) id: number) {
     return this.postsService.delete(id);
   }
-
-
 }

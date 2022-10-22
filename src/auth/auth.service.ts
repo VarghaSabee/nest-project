@@ -110,7 +110,6 @@ export class AuthService {
     async register(signUp: CreateUserDto): Promise<User> {
         const user = await this.userService.create(signUp);
         const { password, ...result } = user;
-
         return result as any;
     }
 }

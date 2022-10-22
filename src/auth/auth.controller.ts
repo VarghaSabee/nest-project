@@ -6,7 +6,6 @@ import {
     HttpStatus,
     Post,
     UseGuards,
-    UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserDto } from 'src/user/dto/user.create.dto';
 import { LoginUserDto } from 'src/user/dto/user.login.dto';
@@ -26,7 +25,6 @@ export class AuthController {
     register(@Body() signUpDto: CreateUserDto): Promise<User> {
         return this.authService.register(signUpDto);
     }
-
 
     @UseGuards(LocalAuthGuard)
     @HttpCode(HttpStatus.OK)
