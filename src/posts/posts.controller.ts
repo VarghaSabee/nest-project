@@ -13,13 +13,16 @@ import {
   // Header,
   // Redirect,
   DefaultValuePipe,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 // import { Request as IRequest, Response as IResponse } from 'express';
 import { DEFAULT_PAGE_SIZE, PostService } from './posts.service';
 
 @Controller('posts')
+@UseGuards(JwtAuthGuard)
 export class PostsController {
   constructor(private readonly postsService: PostService) { }
 

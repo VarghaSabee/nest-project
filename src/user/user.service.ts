@@ -61,11 +61,11 @@ export class UserService {
         return bcrypt.compare(plainPassword, user.password);
     }
 
-    findByEmailOrUsername(email?: string, username?: string) {
+    findByEmailOrUsername(emailOrUserName: string) {
         return this.userRepository.findOne({
             where: [
-                { email: email },
-                { username: username }
+                { email: emailOrUserName },
+                { username: emailOrUserName }
             ]
         })
     }
