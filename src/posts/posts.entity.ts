@@ -1,9 +1,9 @@
 import { Likes } from 'src/likes/likes.entity';
 import { User } from 'src/user/user.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, BaseEntity } from 'typeorm';
 
 @Entity()
-export class Posts {
+export class Posts extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int' })
   id: number;
 
