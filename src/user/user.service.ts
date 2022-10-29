@@ -2,11 +2,13 @@ const bcrypt = require('bcrypt');
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/user.create.dto';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
+import { Cron } from '@nestjs/schedule';
 
 @Injectable()
 export class UserService {
+    private readonly logger = new Logger(UserService.name);
 
     constructor(
         @InjectRepository(User)
@@ -69,4 +71,15 @@ export class UserService {
             ]
         })
     }
+
+    // @Cron('45 * * * * *')
+    // async makeStatisticsJob() {
+    //     const users = await this.userRepository.find()
+    //     const sumWithInitial = users.reduce(
+    //         (previousValue, currentValue) => previousValue + currentValue.id,
+    //         0
+    //     );
+
+    //     this.logger.debug('Sum users id every minute on 45 second sum = ' + sumWithInitial);
+    // }
 }

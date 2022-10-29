@@ -15,6 +15,7 @@ import { Resource, Database } from '@adminjs/typeorm';
 import { AdminModule } from '@adminjs/nestjs'
 import { User } from './user/user.entity';
 import AdminJS from 'adminjs';
+import { ScheduleModule } from '@nestjs/schedule';
 
 AdminJS.registerAdapter({ Resource, Database });
 
@@ -39,6 +40,7 @@ const authenticate = async (email: string, password: string) => {
       synchronize: true,
       database: `${root}/db/db.sqlite`,
     }),
+    ScheduleModule.forRoot(),
     UserModule,
     PostModule,
     LikesModule,
