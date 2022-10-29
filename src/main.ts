@@ -1,3 +1,4 @@
+import * as hbs from 'hbs';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
@@ -11,6 +12,7 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'src/views'));
   app.setViewEngine('hbs');
+  hbs.registerPartials(join(__dirname, '..', 'src/views/partials'));
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors({
     origin: "*"

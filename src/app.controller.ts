@@ -13,6 +13,21 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @Get('/about')
+  @Render('about')
+  async about() {
+
+    return {
+      meta: {
+        description: "Test nest app",
+        title: "Page - About",
+        keywords: "uznu edu",
+        author: "uznu",
+      },
+      message: 'Template test!',
+    };
+  }
+
   @Get()
   @Render('index')
   async root() {
