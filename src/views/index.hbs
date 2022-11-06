@@ -18,10 +18,11 @@
             sweet, but not too short so folks don't simply skip over it
             entirely.</p>
           <p>
-            <a href='#' class='btn btn-primary my-2'>Main call to action</a>
+            <a id="main_btn" href='#' class='btn btn-primary my-2'>Main call to action</a>
             <a href='#' class='btn btn-secondary my-2'>Secondary action</a>
           </p>
         </div>
+        <div id="messages"></div>
       </section>
 
       <div class='album py-5 bg-light'>
@@ -65,5 +66,49 @@
 
     </main>
    {{>footer}}
+   <script type="module">
+  import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+
+  const socket = io("ws://localhost:8080/event", {
+  reconnectionDelayMax: 10000,
+  auth: {
+    token: "123"
+  },
+});
+  const messagesContainer = document.querySelector("#messages")
+
+document.querySelector("#main_btn").addEventListener("click",(e)=>{
+  e.preventDefault()
+socket.emit("event", { a: "b", c: [] });
+})
+
+
+socket.on("recive", (...args) => {
+  console.log("recive => ",args)
+
+const item = document.createElement("li");
+item.innerText = JSON.stringify(args)
+
+  messagesContainer.appendChild(item)
+});
+
+// Server sent Event
+const eventSource = new EventSource('/sse');
+eventSource.onmessage = ({ data }) => {
+  console.log('New message', JSON.parse(data));
+};
+
+
+</script>
+
+   <script >
+// Server sent Event
+// const eventSource = new EventSource('/mysse');
+// eventSource.onmessage = ({ data }) => {
+//   console.log('New message', JSON.parse(data));
+// };
+
+
+</script>
   </body>
 </html>

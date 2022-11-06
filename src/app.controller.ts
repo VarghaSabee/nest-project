@@ -1,4 +1,5 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Render, Sse } from '@nestjs/common';
+import { interval, map, Observable } from 'rxjs';
 import { AppService } from './app.service';
 import { PostService } from './posts/posts.service';
 
@@ -45,4 +46,18 @@ export class AppController {
       posts
     };
   }
+
+
+  @Sse('mysse')
+  sendServerSentEvent(): Observable<MessageEvent> {
+    return interval(1000).pipe(map((_) => ({ data: { hello: 'world' } })));
+  }
+}
+
+/**/
+export interface MessageEvent {
+  data: string | object;
+  // id?: string;
+  // type?: string;
+  // retry?: number;
 }

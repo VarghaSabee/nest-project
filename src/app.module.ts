@@ -16,6 +16,7 @@ import { AdminModule } from '@adminjs/nestjs'
 import { User } from './user/user.entity';
 import AdminJS from 'adminjs';
 import { ScheduleModule } from '@nestjs/schedule';
+import { SocketModule } from './socket/socket.module';
 
 AdminJS.registerAdapter({ Resource, Database });
 
@@ -64,6 +65,7 @@ const authenticate = async (email: string, password: string) => {
         },
       }),
     }),
+    SocketModule,
   ],
   controllers: [AppController],
   providers: [AppService, PostService],
