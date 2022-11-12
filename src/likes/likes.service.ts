@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Posts } from 'src/posts/posts.entity';
+import { Posts } from '../posts/posts.entity';
 import { Repository } from 'typeorm';
 import { CreateLikesDto } from './dto/create-like-dto';
 import { Likes } from './likes.entity';

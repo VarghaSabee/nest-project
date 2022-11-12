@@ -1,5 +1,5 @@
 import { Body, Controller, DefaultValuePipe, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Query } from "@nestjs/common";
-import { DEFAULT_PAGE_SIZE } from "src/posts/posts.service";
+import { DEFAULT_PAGE_SIZE } from "../posts/posts.service";
 import { CreateLikesDto } from "./dto/create-like-dto";
 import { LikesService } from "./likes.service";
 

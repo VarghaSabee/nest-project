@@ -1,5 +1,5 @@
-import { Likes } from 'src/likes/likes.entity';
-import { Posts } from 'src/posts/posts.entity';
+import { Likes } from '../likes/likes.entity';
+import { Posts } from '../posts/posts.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, BaseEntity } from 'typeorm';
 
 @Entity('users')

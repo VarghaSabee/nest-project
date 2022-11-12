@@ -7,7 +7,7 @@
 // import type { Response } from 'express';
 // import { Observable } from 'rxjs';
 // import { map } from 'rxjs/operators';
-// import { User } from 'src/user/user.entity';
+// import { User } from '../user/user.entity';
 // import { AuthService } from '../auth.service';
 
 // @Injectable()

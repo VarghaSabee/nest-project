@@ -7,9 +7,9 @@ import {
     Post,
     UseGuards,
 } from '@nestjs/common';
-import { CreateUserDto } from 'src/user/dto/user.create.dto';
-import { LoginUserDto } from 'src/user/dto/user.login.dto';
-import { AuthUser } from 'src/user/user.decorator';
+import { CreateUserDto } from '../user/dto/user.create.dto';
+import { LoginUserDto } from '../user/dto/user.login.dto';
+import { AuthUser } from '../user/user.decorator';
 
 import { User } from '../user/user.entity';
 import { AuthService } from './auth.service';
